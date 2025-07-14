@@ -151,8 +151,8 @@ CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_header
    order_tax_amount VARCHAR(16777216),
    order_discount_amount VARCHAR(16777216),
    order_total NUMBER(38,4)
-);
-
+)
+CHANGE_TRACKING = TRUE;
 
 -- order_detail table build
 CREATE OR ALTER TABLE {{env}}_tasty_bytes.raw_pos.order_detail
