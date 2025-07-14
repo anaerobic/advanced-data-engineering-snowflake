@@ -13,6 +13,8 @@ env = "STAGING"
 
 st.title('Weather and Sales Trends for Hamburg, Germany')
 
+st.divider()
+
 # Load the view and create a pandas dataframe 
 hamburg_weather = session.table(f"{env}_TASTY_BYTES.HARMONIZED.WEATHER_HAMBURG").select(
     col("DATE"),
