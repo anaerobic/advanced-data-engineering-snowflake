@@ -34,7 +34,7 @@ CREATE OR REPLACE ALERT staging_tasty_bytes.public.order_data_quality_alert
       AND ORDER_TS > DATEADD(hour, -6, CURRENT_TIMESTAMP());
         
       -- Call stored procedure for notification
-      -- CALL staging_tasty_bytes.raw_pos.notify_data_quality_team();
+      CALL staging_tasty_bytes.raw_pos.notify_data_quality_team();
     END;
 
 -- Check alert status

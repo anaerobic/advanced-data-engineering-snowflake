@@ -7,7 +7,7 @@ USE SCHEMA public;
 CREATE OR REPLACE NOTIFICATION INTEGRATION email_notification_int
 TYPE = EMAIL
 ENABLED = TRUE
-ALLOWED_RECIPIENTS = ('ADD EMAIL ADDRESS');  -- Update the recipient's email here
+ALLOWED_RECIPIENTS = ('mwm.cal@gmail.com');
 
 CREATE OR REPLACE PROCEDURE staging_tasty_bytes.raw_pos.notify_data_quality_team()
 RETURNS STRING
@@ -115,7 +115,7 @@ def notify_data_quality_team(session: Session) -> str:
     # Send the email
     session.call("system$send_email",
                  "email_notification_int",
-                 "ADD EMAIL ADDRESS",
+                 "mwm.cal@gmail.com",
                  f"ALERT: {record_count} orders with NULL values detected",
                  email_content,
                  "text/html")
@@ -130,13 +130,13 @@ $$;
 SHOW ALERTS LIKE 'order_data_quality_alert';
 
 -- Start the alert
-ALTER ALERT order_data_quality_alert RESUME;
+ALTER ALERT staging_tasty_bytes.public.order_data_quality_alert RESUME;
 
 -- Execute the alert, go check your email
-EXECUTE ALERT order_data_quality_alert;
+EXECUTE ALERT staging_tasty_bytes.public.order_data_quality_alert;
 
 -- Suspend the alert after confirming email receipt
-ALTER ALERT order_data_quality_alert SUSPEND;
+ALTER ALERT staging_tasty_bytes.public.order_data_quality_alert SUSPEND;
 
 -- Drop the alert
-DROP ALERT order_data_quality_alert;
+DROP ALERT staging_tasty_bytes.public.order_data_quality_alert;
